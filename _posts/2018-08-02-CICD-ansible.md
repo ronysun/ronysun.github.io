@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: "ansbile-galaxy"
 categories:
   - CI&CD

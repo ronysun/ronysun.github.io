@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: "Openstack的集成测试框架Tempst"
 categories:
   - 测试

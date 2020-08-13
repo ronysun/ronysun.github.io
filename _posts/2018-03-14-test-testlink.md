@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: "testlink1.9.16的搭建"
 categories:
   - 测试

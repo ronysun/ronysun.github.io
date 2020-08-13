@@ -1,5 +1,5 @@
 ---
-layout: post  
+layout: article  
 title: rally task start命令代码及task配置文件分析   
 categories:  
   - openstack  

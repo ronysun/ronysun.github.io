@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: "CI环境搭建"
 categories:
   - CI&CD

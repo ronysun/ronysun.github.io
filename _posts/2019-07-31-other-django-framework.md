@@ -1,5 +1,5 @@
 ---
-layout: post 
+layout: article 
 title: Django框架
 description: Django框架
 categories: 

@@ -1,5 +1,5 @@
 ---
-layout: post  
+layout: article  
 title: Rally框架分析   
 categories:  
   - openstack  

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: "EPC核心网介绍"
 date: 2020-08-11
 categories:

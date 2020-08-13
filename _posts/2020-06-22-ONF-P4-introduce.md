@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: "P4 introduce"
 categories:
   - OpenNetworking

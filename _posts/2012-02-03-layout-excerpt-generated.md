@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: "Layout: Excerpt (Generated with Separator Tag)"
 excerpt_separator: "<!--more-->"
 categories:

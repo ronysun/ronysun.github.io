@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: "Post: Video (YouTube)"
 categories:
   - Post Formats

@@ -1,5 +1,5 @@
 ---
-layout: post
+layout: article
 title: "Post: Future Date"
 date: 2010-12-31
 categories:

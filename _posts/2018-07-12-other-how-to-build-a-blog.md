@@ -1,5 +1,5 @@
 ---
-layout: post 
+layout: article 
 title: How to build a blog
 description: 如何在github.io上建立一个blog
 categories: 
