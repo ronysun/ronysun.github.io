@@ -12,7 +12,7 @@ EPC是Evolved Packet Core的缩写，是LTE网络核心网架构。
 ![EPC](https://img-blog.csdn.net/20150909120950694)
 ### EPC中的网元
 
-| `网元` | `描述` |
+| 网元 | 描述 |
 | --- | --- |
 | UE | User Equipment |
 |MME|Mobility Management Entity|
@@ -21,6 +21,7 @@ EPC是Evolved Packet Core的缩写，是LTE网络核心网架构。
 |P-GW|PDN(Packet Data Network) GW是ECP网络与外部IP网络之间的连接点|
 
 ### EPC中的接口
+
 |接口|描述|
 |----|----|
 |S1-MME|eNodeB与MME之间的接口，运行SCTP和S1-AP协议|
@@ -28,6 +29,7 @@ EPC是Evolved Packet Core的缩写，是LTE网络核心网架构。
 |S11|MME与S-GW之间的接口，运行GTP-C协议|
 |S6a|MME与HSS之间的接口，运行SCTP协议及Diameter协议|
 |S4|SGSN与S-GW之间的接口|
+
 ## LTE Protocol Stacks
 ### 用户面协议
 ![LTE用户面协议](https://img-blog.csdn.net/20150909135820709)
