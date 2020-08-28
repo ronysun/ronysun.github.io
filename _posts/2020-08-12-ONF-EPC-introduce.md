@@ -1,9 +1,10 @@
 ---
 layout: article
 title: "EPC核心网介绍"
-date: 2020-08-11
+date: 2020-08-28
 tags:
-  - ONF
+  - Network
+  - LTE
 
 ---
 # 概述
@@ -27,12 +28,14 @@ EPC是Evolved Packet Core的缩写，是LTE网络核心网架构。
 |S1-MME|eNodeB与MME之间的接口，运行SCTP和S1-AP协议|
 |S1-U|eNodeB与S-GW之间的接口，运行GTP-U协议|
 |S11|MME与S-GW之间的接口，运行GTP-C协议|
+|S5|SGW与PGW之间的控制和数据面接口，运行GTP-C和GTP-U。为每一个用户提供GTP隧道管理（创建/删除/修改）|
 |S6a|MME与HSS之间的接口，运行SCTP协议及Diameter协议|
 |S4|SGSN与S-GW之间的接口|
+移动网的DPI系统一般需要采集S1-MME，S1-U，S11，S6a，S4的数据
 
 ## LTE Protocol Stacks
 ### 用户面协议
-![LTE用户面协议](https://img-blog.csdn.net/20150909135820709)
+![LTE用户/数据面协议](https://img-blog.csdn.net/20150909135820709)
 ### 控制面协议
 ![LTE控制面协议](https://img-blog.csdn.net/20150909144404890)
 ## Traffic Flow on the LTE network
