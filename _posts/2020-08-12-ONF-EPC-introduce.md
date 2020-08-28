@@ -31,6 +31,7 @@ EPC是Evolved Packet Core的缩写，是LTE网络核心网架构。
 |S5|SGW与PGW之间的控制和数据面接口，运行GTP-C和GTP-U。为每一个用户提供GTP隧道管理（创建/删除/修改）|
 |S6a|MME与HSS之间的接口，运行SCTP协议及Diameter协议|
 |S4|SGSN与S-GW之间的接口|
+
 移动网的DPI系统一般需要采集S1-MME，S1-U，S11，S6a，S4的数据
 
 ## LTE Protocol Stacks

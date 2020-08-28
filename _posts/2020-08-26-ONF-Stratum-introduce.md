@@ -7,7 +7,7 @@ tags:
 ---
 # Stratum introduce
 ## 摘要
-Stratum是开源的芯片不相关（silicon-independent）的SDN交换机操作系统。其公开了一组SDN接口包括P4Runtime和OpenConfig/gNMI、gNOI。目前支持的设备包括Barefoot的Tofino、Broadcom的Tomahawk，以及bmv2软交换机。
+Stratum是开源的芯片不相关（silicon-independent）的SDN交换机操作系统。其公开了一组SDN接口包括P4Runtime和OpenConfig/gNMI、gNOI。目前支持的设备包括Barefoot的Tofino、Broadcom的Tomahawk，以及bmv2软交换机。  
 [官方文档](https://www.opennetworking.org/stratum/)  
 [代码库](https://github.com/stratum/stratum)
 
