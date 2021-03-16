@@ -46,4 +46,6 @@ Trident是L3 Programmable Ethernet Switch，支持NPL编程。256个50G PAM4 Ser
 ## 参考
 SerDes：在SerDes技术流行前，主要是并行总线接口。随着接口带宽的不断提高，由于信号质量等问题，并行总线接口提升的两种方式：“提升时钟频率”和“加大数据位宽”遇到了瓶颈。而SerDes采用的差分信号技术则完美避免了以上问题。Serializer把并行信号转化为串行信号。Deserializer把串行信号转化为并行信号。一般地，并行信号为8/10bit或者16/20bit宽度。编码则一般采用8/10B或。[SerDes详解](http://xilinx.eetrend.com/files-eetrend-xilinx/forum/201709/11981-32468-serdeszhi_shi_xiang_jie_.pdf)    
 http://www.shjinyuan.cn/engine/news/company//2020/1021/590.html  
-https://www.sohu.com/a/360451846_258957
+https://www.sohu.com/a/360451846_258957  
+https://www.nextplatform.com/2019/12/12/broadcom-launches-another-tomahawk-into-the-datacenter/  
+[深入了解思科交换机中的商用交换芯片](https://www.nextplatform.com/2018/06/20/a-deep-dive-into-ciscos-use-of-merchant-switch-chips/)  
