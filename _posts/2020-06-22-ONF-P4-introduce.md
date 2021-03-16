@@ -1,8 +1,6 @@
 ---
 layout: article
 title: "P4 introduce"
-categories:
-  - ONF
 tags:
   - ONF
 
@@ -42,7 +40,7 @@ The V1Model consists of six P4 programmable components:
 1. 执行root-bootstrap.sh和user-bootstrap.sh，代码全部修改为gitee上的代码
 1. 修改grpc中的submodule为gitee中的地址。修改.gitmodule，执行git submodule sync
 
-## Firsh program  
+## First program  
 参考 https://github.com/p4lang/tutorials/tree/master/exercises/basic
 1. 在P4 tutorial的exercises/中有多个实例， 下是一个需要编程题（编写TODO部分），其子目录solution中的*.p4是添加了TODO部分的参考答案。
 1. 在该basic目录下执行make run会执行p4c编译代码，并加载到ovs中，进入mininet进行测试。

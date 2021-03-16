@@ -3,7 +3,7 @@ layout: article
 title: "SCTP introduce"
 data: 2020-11-11
 tags:
-  - ONF
+  - Network
 
 ---
 # SCTP introduce
