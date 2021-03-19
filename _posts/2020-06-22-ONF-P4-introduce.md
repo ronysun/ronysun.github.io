@@ -7,6 +7,7 @@ tags:
 ---
 # P4 introduce
 ## 摘要
+P4是Programming Protocol-independent Packet Processors的缩写，
 开发环境：windows10 virtualBox vagrant  
 [官方文档](https://www.opennetworking.org/p4/)  
 [代码库](https://github.com/p4lang)
@@ -14,14 +15,15 @@ tags:
 ## P4中的一些概念
 1. P4是协议不相关的，所谓协议相关就是只能根据现有的协议来进行编程，例如OpenFlow1.0时有12个字段（IP，MAC等），但这明显是远远不够的。那么P4就解决了这个问题
 1. P4可以定义自己的匹配字段和动作（action），从而定义流表，进而形成流水线
-1. PISA（Protocol Independent Switch Architecture），一种可编程网络芯片架构
+1. PISA（Protocol Independent Switch Architecture），一种通用的网络设备架构
 1. P4 runtime的定位与OpenFlow一致，与P4配合使用
-1. P4c是P4的编译器项目
+1. P4c是P4的reference编译器项目
 1. behavioral-model（bmv2）是一个支持P4的软交换机version2
 1. PI是P4 runtime的实现，用于控制面对数据面的控制
-1. mininet可以构建虚拟网络，用于学习和测试
+1. mininet是一个轻量的网络仿真环境，可以构建虚拟网络，用于学习和测试
+1. P4 tagets指包括可编程ASIC，ovs，Bmv2等可加载P4程序的网络器件
 
-P4  target architecture
+一个简单的P4 Bmv2的simple switch target architecture
 ![P4 V1model](https://build-a-router-instructors.github.io/images/V1Model.png)
 The V1Model consists of six P4 programmable components:
 - Parser
@@ -43,9 +45,109 @@ The V1Model consists of six P4 programmable components:
 ## First program  
 参考 https://github.com/p4lang/tutorials/tree/master/exercises/basic
 1. 在P4 tutorial的exercises/中有多个实例， 下是一个需要编程题（编写TODO部分），其子目录solution中的*.p4是添加了TODO部分的参考答案。
-1. 在该basic目录下执行make run会执行p4c编译代码，并加载到ovs中，进入mininet进行测试。
-1. 当basic.p4替换为solution中的文件时，各个host就可以ping通了。
+2. 在该basic目录下执行make run会执行p4c编译代码，并在mininet中执行Bmv2。该目录下的Makefile将pod-topo目录下的topology.json作为拓扑信息参数，传递给../../utils目录下的Makefile，并执行该目录下的run_exercise.py脚本。
+3. 把basic.p4替换为solution中的文件时，各个host就可以ping通了。  
+以basic.p4进行说明：
+```
+/*************************************************************************
+*********************** H E A D E R S  ***********************************
+*************************************************************************/
+typedef bit<9>  egressSpec_t;
+typedef bit<48> macAddr_t;
+typedef bit<32> ip4Addr_t;
 
+header ethernet_t {            //header数据结构对应packet中的header
+    macAddr_t dstAddr;
+    macAddr_t srcAddr;
+    bit<16>   etherType;
+}
+
+struct headers {              //struct类似于python中的dictionary
+    ethernet_t   ethernet;
+    ipv4_t       ipv4;
+}
+/*************************************************************************
+*********************** P A R S E R  ***********************************
+*************************************************************************/
+parser MyParser(packet_in packet,
+                out headers hdr,
+                inout metadata meta,
+                inout standard_metadata_t standard_metadata) {
+
+    state start {                   //进入parse过程，进入parse_ethernet
+        transition parse_ethernet;
+    }
+
+    state parse_ethernet {
+        packet.extract(hdr.ethernet);       //参数hdr的ethernet头，解析成功，header的validity会自动设置为true，即自动帮我们确定header的格式是否正确
+        transition select(hdr.ethernet.etherType) {     //根据hdr.ethernet.etherType的值选择处理流程
+            TYPE_IPV4: parse_ipv4;
+            default: accept;
+        }
+    }
+
+    state parse_ipv4 {
+        packet.extract(hdr.ipv4);
+        transition accept;
+    }
+
+}
+
+/*************************************************************************
+**************  I N G R E S S   P R O C E S S I N G   *******************
+*************************************************************************/
+
+control MyIngress(inout headers hdr,
+                  inout metadata meta,
+                  inout standard_metadata_t standard_metadata) {
+    action drop() {
+        mark_to_drop(standard_metadata);
+    }
+    
+    action ipv4_forward(macAddr_t dstAddr, egressSpec_t port) {         //P4中的action就是C语言中的函数，此action需传入两个参数，此处可结合s1中[ipv4_lpm这个table](#ipv4_lpm)去理解
+        standard_metadata.egress_spec = port;
+        hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;
+        hdr.ethernet.dstAddr = dstAddr;
+        hdr.ipv4.ttl = hdr.ipv4.ttl - 1;
+    }
+    
+    table ipv4_lpm {            //建立一个名称为ipv4_lpm（longest prefix match）的table
+        key = {
+            hdr.ipv4.dstAddr: lpm;          //通过ipv4的dstAddr进行lpm
+        }
+        actions = {             //包含table中所有可能的动作
+            ipv4_forward;
+            drop;
+            NoAction;
+        }
+        size = 1024;            //table的entry数量
+        default_action = drop();
+    }
+    
+    apply {
+        if (hdr.ipv4.isValid()) {
+            ipv4_lpm.apply();
+        }
+    }
+}
+
+/*************************************************************************
+***********************  S W I T C H  *******************************
+*************************************************************************/
+
+V1Switch(
+MyParser(),
+MyVerifyChecksum(),
+MyIngress(),
+MyEgress(),
+MyComputeChecksum(),
+MyDeparser()
+) main;
+```
+### S1交换机
+在该实验中，通过静态建表的方式，在switch中的有<span id="ipv4_lpm">MyIngress.ipv4_lpm</span>表内容如下：
+![ipv4_lpm_table](../image/P4introduce-ipv4-lpm-table.png)  
+则当packet的ipv4.dstAddr匹配table，根据命中的action，传入参数dstAddr和port
 ## P4 language specification
 
 ### Overview
@@ -69,9 +171,9 @@ control MatchActionPipe<H>(in bit<4> inputPort,
                            out bit<4> outputPort);
 ```
 此declaration描述了一个叫MatchActionPipe的block，该block通过对data-dependent sequence of match-action单元装置和其他必要的constructs进行programmed
-- 第一个参数是一个命名为inputPort的4bit的值，其中的<span style="color:blue;">in<span>表示这是一个输入，不能修改
-- 第二个参数是一个命名为parsedHeaders的H类型的object，<font color=Blue>inout</font>表明这个参数是both an input and an output
-- 第三个参数是一个命名为outputPort的4bit的值，其中<font color=blue>out</font>表明这是一个初始值未定义的输出
+- 第一个参数是一个命名为inputPort的4bit的值，其中的<span style="color:blue;">in</span>表示这是一个输入，不能修改
+- 第二个参数是一个命名为parsedHeaders的H类型的object，<span style="color:blue;">inout</span>表明这个参数是both an input and an output
+- 第三个参数是一个命名为outputPort的4bit的值，其中<span style="color:blue;">out</span>表明这是一个初始值未定义的输出
 
 ### Extern objects and functions
 P4 programs还能与体系结构（architecture）所提供的object and function交互（interact）。这些objects通过extern construct描述，such objects expose to the data-plane
