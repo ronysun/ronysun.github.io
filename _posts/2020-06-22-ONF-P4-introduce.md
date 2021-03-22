@@ -47,8 +47,8 @@ The V1Model consists of six P4 programmable components:
 1. 在P4 tutorial的exercises/中有多个实例， 下是一个需要编程题（编写TODO部分），其子目录solution中的*.p4是添加了TODO部分的参考答案。
 2. 在该basic目录下执行make run会执行p4c编译代码，并在mininet中执行Bmv2。该目录下的Makefile将pod-topo目录下的topology.json作为拓扑信息参数，传递给../../utils目录下的Makefile，并执行该目录下的run_exercise.py脚本。
 3. 把basic.p4替换为solution中的文件时，各个host就可以ping通了。  
-以basic.p4进行说明：
-```
+以basic.p4进行说明：  
+```c
 /*************************************************************************
 *********************** H E A D E R S  ***********************************
 *************************************************************************/
@@ -56,7 +56,7 @@ typedef bit<9>  egressSpec_t;
 typedef bit<48> macAddr_t;
 typedef bit<32> ip4Addr_t;
 
-header ethernet_t {            //header数据结构对应packet中的header
+header ethernet_t {         //header数据结构对应packet中的header
     macAddr_t dstAddr;
     macAddr_t srcAddr;
     bit<16>   etherType;
@@ -143,6 +143,7 @@ MyEgress(),
 MyComputeChecksum(),
 MyDeparser()
 ) main;
+
 ```
 ### S1交换机
 在该实验中，通过静态建表的方式，在switch中的有<span id="ipv4_lpm">MyIngress.ipv4_lpm</span>表内容如下：
@@ -165,7 +166,7 @@ The core abstractions：
 
 ### Data plane interface
 
-```
+```c
 control MatchActionPipe<H>(in bit<4> inputPort,
                            inout H parsedHeaders,
                            out bit<4> outputPort);
@@ -179,7 +180,7 @@ control MatchActionPipe<H>(in bit<4> inputPort,
 P4 programs还能与体系结构（architecture）所提供的object and function交互（interact）。这些objects通过extern construct描述，such objects expose to the data-plane
 
 一个extern object描述了一组由object实现的方法，但不是这些方法的实现（类似面向对象方法中的抽象类）下面这个结构体描述了the operations offered by an incremental checksum unit
-```
+```c
 extern Checksum16 {
     Checksum16();              // constructor
     void clear();              // prepare unit for computation
