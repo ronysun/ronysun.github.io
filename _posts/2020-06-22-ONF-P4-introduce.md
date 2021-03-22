@@ -48,7 +48,7 @@ The V1Model consists of six P4 programmable components:
 2. 在该basic目录下执行make run会执行p4c编译代码，并在mininet中执行Bmv2。该目录下的Makefile将pod-topo目录下的topology.json作为拓扑信息参数，传递给../../utils目录下的Makefile，并执行该目录下的run_exercise.py脚本。
 3. 把basic.p4替换为solution中的文件时，各个host就可以ping通了。  
 以basic.p4进行说明：
-```
+```c
 /*************************************************************************
 *********************** H E A D E R S  ***********************************
 *************************************************************************/
