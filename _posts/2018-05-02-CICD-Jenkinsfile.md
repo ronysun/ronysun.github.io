@@ -1,7 +1,7 @@
 ---
 layout: article
 title: "CI环境搭建"
-categories:
+tags:
   - CI&CD
 ---
 ## CI框架
@@ -101,7 +101,7 @@ pipeline {
 ### Jenkinsfile中根据git tag作为判断条件
 Jenkinsfile的官方文档中对when的说明中有如下描述：  
 tag  
-Execute the stage if the <font color=red>TAG_NAME</font> variable matches the given pattern. Example: <font color=red>when { tag "release-*" }</font>. If an empty pattern is provided the stage will execute if the <font color=red>TAG_NAME</font> variable exists (same as <font color=red>buildingTag()</font>).
+Execute the stage if the <span style="color:red;">TAG_NAME</span> variable matches the given pattern. Example: <span style="color:red">when { tag "release-*" }</span>. If an empty pattern is provided the stage will execute if the <span style="color:red;">TAG_NAME</span> variable exists (same as <span style="color:red;">buildingTag()</span>).
 写法如下：  
 ```Groovy
 when {
