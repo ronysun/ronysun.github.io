@@ -48,6 +48,7 @@ The V1Model consists of six P4 programmable components:
 2. 在该basic目录下执行make run会执行p4c编译代码，并在mininet中执行Bmv2。该目录下的Makefile将pod-topo目录下的topology.json作为拓扑信息参数，传递给../../utils目录下的Makefile，并执行该目录下的run_exercise.py脚本。
 3. 把basic.p4替换为solution中的文件时，各个host就可以ping通了。  
 以basic.p4进行说明：  
+
 ```c
 /*************************************************************************
 *********************** H E A D E R S  ***********************************
@@ -104,7 +105,7 @@ control MyIngress(inout headers hdr,
         mark_to_drop(standard_metadata);
     }
     
-    action ipv4_forward(macAddr_t dstAddr, egressSpec_t port) {         //P4中的action就是C语言中的函数，此action需传入两个参数，此处可结合s1中[ipv4_lpm这个table](#ipv4_lpm)去理解
+    action ipv4_forward(macAddr_t dstAddr, egressSpec_t port) {         //P4中的action就是C语言中的函数，此action需传入两个参数，此处可结合s1中ipv4_lpm这个table去理解
         standard_metadata.egress_spec = port;
         hdr.ethernet.srcAddr = hdr.ethernet.dstAddr;
         hdr.ethernet.dstAddr = dstAddr;
@@ -143,12 +144,11 @@ MyEgress(),
 MyComputeChecksum(),
 MyDeparser()
 ) main;
-
 ```
 ### S1交换机
-在该实验中，通过静态建表的方式，在switch中的有<span id="ipv4_lpm">MyIngress.ipv4_lpm</span>表内容如下：
-![ipv4_lpm_table](../image/P4introduce-ipv4-lpm-table.png)  
-则当packet的ipv4.dstAddr匹配table，根据命中的action，传入参数dstAddr和port
+在该实验中，通过静态建表的方式，在switch中的有MyIngress.ipv4_lpm表内容如下：
+![ipv4_lpm_table](https://gitee.com/ronysun/ronysun/raw/master/image/P4introduce-ipv4-lpm-table.png)
+则当packet的ipv4.dstAddr匹配table中match的key，根据命中的action（ipv4_forward），传入参数dstAddr和port,并进行处理
 ## P4 language specification
 
 ### Overview
@@ -180,6 +180,7 @@ control MatchActionPipe<H>(in bit<4> inputPort,
 P4 programs还能与体系结构（architecture）所提供的object and function交互（interact）。这些objects通过extern construct描述，such objects expose to the data-plane
 
 一个extern object描述了一组由object实现的方法，但不是这些方法的实现（类似面向对象方法中的抽象类）下面这个结构体描述了the operations offered by an incremental checksum unit
+
 ```c
 extern Checksum16 {
     Checksum16();              // constructor
