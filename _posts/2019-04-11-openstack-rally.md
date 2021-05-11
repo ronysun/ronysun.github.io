@@ -1,8 +1,9 @@
 ---
 layout: article  
 title: Rally框架分析   
-categories:  
-  - openstack  
+tags:
+  - openstack
+  - testing
 ---
 ## rally/rally的目录结构
 <pre>

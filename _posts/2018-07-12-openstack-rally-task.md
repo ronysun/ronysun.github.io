@@ -1,8 +1,9 @@
 ---
 layout: article  
 title: rally task start命令代码及task配置文件分析   
-categories:  
-  - openstack  
+tags:
+  - openstack
+  - testing
 ---
 ## rally task配置文件
 Rally本身提供了一些task配置文件，用于提供测试用例中所需的信息包括场景测试中所传入的参数、运行方式是并行还是串行，context等信息。Rally本身提供的task 配置文件在rally/samples/task/scenarios/目录下。

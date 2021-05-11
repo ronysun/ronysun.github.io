@@ -2,8 +2,8 @@
 layout: article 
 title: Django框架
 description: Django框架
-categories: 
-  - 其他
+tags:
+  - develop
 ---
 ## django.db
 djanggo.db的package contents：  

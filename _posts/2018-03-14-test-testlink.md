@@ -1,8 +1,8 @@
 ---
 layout: article
 title: "testlink1.9.16的搭建"
-categories:
-  - 测试
+tags:
+  - testing
 ---
 ## 摘要
 
