@@ -1,8 +1,8 @@
 ---
 layout: article
 title: "Dockerfile介绍"
-categories:
-  - test
+tags:
+  - docker
 ---
 ## Dockerfile
 Dockerfile常用命令：

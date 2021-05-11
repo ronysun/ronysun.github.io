@@ -1,8 +1,8 @@
 ---
 layout: article
 title: "各种问题"
-categories:
-  - 其他
+tags:
+  - other
 ---
 ## git push 新的分支时提示错误
 

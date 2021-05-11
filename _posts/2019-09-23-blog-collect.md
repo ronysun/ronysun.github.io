@@ -1,7 +1,7 @@
 ---
 layout: article
 title: "Blog Collect"
-categories:
+tags:
   - other
 
 ---

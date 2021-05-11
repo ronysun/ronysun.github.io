@@ -1,8 +1,9 @@
 ---
 layout: article
 title: "Openstack的集成测试框架Tempst"
-categories:
-  - 测试
+tags:
+  - openstack
+  - testing
 
 ---
 # 摘要

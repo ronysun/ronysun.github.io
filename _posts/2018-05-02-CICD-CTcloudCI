@@ -3,9 +3,18 @@ layout: article
 title: "CI环境搭建"
 tags:
   - CI&CD
+  - testing
 ---
 ## CI框架
-Jenkins+Gerrit+GIT
+Jenkins+Gerrit+GIT+Docker+ansible。
+本平台实现的功能：
+1. 当主分支添加发布tag时，出发打包过程，将源代码进行rpmbuild，并将打包结果发布到私有yum源上
+1. 开发提交commit时，出发tox任务，进行单元测试以及代码覆盖率检查
+1. 每日凌晨对test分支上的代码进行打包、部署，通过rally和tempest进行功能和集成测试
+1. 通过docker的方式进行打包环境的隔离，解决CI平台资源不足的问题
+1. 通过Jenkins Job Builder实现CI平台上JenkinsJobs的代码式管理，使平台能够快速搭建
+1. 通过ansible实现部署测试环境
+1. 集中Jenkinsfile到Bootes代码库中，使持续集成代码不侵入业务代码库
 ### Jenkins与Gerrit的集成
 在Gerrit中的配置:  
 1.Create the profile through in Gerrit web interface for your Jenkins user, and set up a SSH key for that user.  

@@ -1,7 +1,7 @@
 ---
 layout: article
 title: "ansbile-galaxy"
-categories:
+tags:
   - CI&CD
 ---
 ## ansible-galaxy使用
