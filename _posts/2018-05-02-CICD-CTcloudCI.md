@@ -6,7 +6,9 @@ tags:
   - testing
 ---
 ## CI框架
-Jenkins+Gerrit+GIT+Docker+ansible。
+
+Jenkins+Gerrit+GIT+Docker+ansible
+
 本平台实现的功能：
 1. 当主分支添加发布tag时，出发打包过程，将源代码进行rpmbuild，并将打包结果发布到私有yum源上
 1. 开发提交commit时，出发tox任务，进行单元测试以及代码覆盖率检查
@@ -15,7 +17,9 @@ Jenkins+Gerrit+GIT+Docker+ansible。
 1. 通过Jenkins Job Builder实现CI平台上JenkinsJobs的代码式管理，使平台能够快速搭建
 1. 通过ansible实现部署测试环境
 1. 集中Jenkinsfile到Bootes代码库中，使持续集成代码不侵入业务代码库
+
 ### Jenkins与Gerrit的集成
+
 在Gerrit中的配置:  
 1.Create the profile through in Gerrit web interface for your Jenkins user, and set up a SSH key for that user.  
 2.Gerrit web interface > Admin > Groups > Non-Interactive Users > Add your jenkins user.  
@@ -124,6 +128,7 @@ when {
 ![BuildByParameter](https://github.com/ronysun/MarkdownImage/raw/master/Jenkins-build-by-paramiter.png)
 
 ### environment通过shell输出进行变量赋值，字符串后带有换行符的问题：
+
 ```Groovy
     environment {
         TAG_NAME = sh returnStdout:true, script: "git describe --tags"
@@ -132,7 +137,9 @@ when {
 上面的步骤会导致TAG_NAME这个变量的最后有一个看不到的换行符，可能会导致某些问题。
 解决方法：
 用awk解决：git describe --tags|awk '{printf $1}'
+
 ### pipeline脚本中引用环境变量时变量后不能直接带.
+
 ```Groovy
        stage('uploadRPM') {
            steps {
@@ -142,7 +149,9 @@ when {
 ```
 上面的写法会报错，应修改如下：
 ${BUILD_ID}.EL7
+
 ### Jenkins中job运行在docker中时，报错：
+
 ![error-build-in-docker](https://github.com/ronysun/MarkdownImage/raw/master/Jenkins-build-in-docker-error.png)
 问题原因：[oci-mount的bug导致](https://access.redhat.com/errata/RHBA-2018:0434)  
 解决方法：  
