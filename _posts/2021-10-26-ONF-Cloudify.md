@@ -34,10 +34,10 @@ IT自动化运维工作编排
 1. Cloudify Defined by TOSCA或K8S原生的YAML文件方式， As a Workload Provisioner of K8S
 1. Cloudify As a K8S Provisioner, 可以在多云上管理多个K8S集群
 1. Cloudify可作为服务代理，从K8S集群内部访问外部资源  
-   ![kubernetes-cloudify-integration](../image/kubernetes-cloudify-integration.png)
+   ![kubernetes-cloudify-integration](https://gitee.com/ronysun/ronysun/raw/master/image/kubernetes-cloudify-integration.png)
 
 ## How Cloudify Enhances Helm’s Capabilities
-   ![onap-helm-cloudify-integration](../image/onap-helm-cloudify-integration.png)
+   ![onap-helm-cloudify-integration](https://gitee.com/ronysun/ronysun/raw/master/image/onap-helm-cloudify-integration.png)
 
 ## Bibliography
    [Cloudify Support For Helm](https://cloudify.co/blog/cloudify-support-for-helm-the-kubernetes-package-manager/)
