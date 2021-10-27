@@ -147,7 +147,7 @@ MyDeparser()
 ```
 ### S1交换机
 在该实验中，通过静态建表的方式，在switch中的有MyIngress.ipv4_lpm表内容如下：
-![ipv4_lpm_table](https://gitee.com/ronysun/ronysun/raw/master/image/P4introduce-ipv4-lpm-table.png)
+![ipv4_lpm_table](https://gitee.com/ronysun/images/raw/master/P4introduce-ipv4-lpm-table.png)
 则当packet的ipv4.dstAddr匹配table中match的key，根据命中的action（ipv4_forward），传入参数dstAddr和port,并进行处理
 ## P4 language specification
 
