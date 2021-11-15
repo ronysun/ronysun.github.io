@@ -16,9 +16,7 @@ centos7.3上php和mysql都需要升级
 升级完成后，按照testlink的安装文档:
 
 1. 进行logs和upload_area文件夹的创建和权限修改
-2. 在浏览器上点击http://($ip)/testlink/install/index.php，进行安装操作
-
-
+2. 在浏览器上点击<http://($ip)/testlink/install/index.php>，进行安装操作
 
 ## Docker部署testlink
 
