@@ -5,11 +5,12 @@ tags:
   - docker
 ---
 ## Dockerfile
+
 Dockerfile常用命令：
 
 ADD & COPY ：拷贝文件到镜像中。ADD能够自动解压.gz .zip等压缩文件，并能够添加URL文件  
 ADD test.tar.gz /root/tmp/  
-ADD http://172.28.15.92/rpmdir/python2-netmiko-2.0.1.2-1.el7.noarch.rpm /root
+ADD <http://172.28.15.92/rpmdir/python2-netmiko-2.0.1.2-1.el7.noarch.rpm> /root
 
 RUN：执行一条命令  
 RUN yum install -y httpd
@@ -42,8 +43,8 @@ ARG & ENV:定义环境变量or参数，ARG能够在docker build时通过--build-
 ENV test_value1='foo' test_value2='foo2'  
 ARG usernmae=jenkins
 
-
 Dokcerfile的所有命令：
+
 1. FROM
 1. RUN
 1. CMD
@@ -64,6 +65,7 @@ Dokcerfile的所有命令：
 1. SHELL
 
 Dockerfile example：
+
 ```Dockerfile
 FROM centos:7.4.1708
 LABEL maintainer='sunln2008@foxmail.com'
@@ -82,4 +84,3 @@ USER ${username}
 # ENTRYPOINT ls /data/
 # CMD ls /data
 ```
-
