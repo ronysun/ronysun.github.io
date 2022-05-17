@@ -32,3 +32,13 @@ tags:
 ## Jekyll主题
 
 在jekyllthemes.org 上有很多主题可用挑选使用
+
+## Jekyll pulgin
+
+在<https://github.com/jekyll> 上有很多plugin可供使用，典型的有：  
+[jekyll-admin](https://github.com/jekyll/jekyll-admin)  
+[jekyll-archives](https://github.com/jekyll/jekyll-archives)
+
+## Liquid是Jekyll的模板语言
+
+<https://liquid.bootcss.com/>
