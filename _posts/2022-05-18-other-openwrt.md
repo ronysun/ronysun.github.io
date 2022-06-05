@@ -9,7 +9,8 @@ tags:
 
 ## 信息  
 
-硬件：
+硬件：  
+
 |项目|参数|
 |---|---|
 |Model|FriendlyElec NanoPi R2S|
@@ -32,7 +33,9 @@ tags:
    src/gz openwrt_telephony https://mirrors.ustc.edu.cn/openwrt/releases/21.02.3/packages/aarch64_generic/telephony
    ```
 
-## 调整overlay分区（Resizing partitions）
+## OpenWRT分区
+
+### 调整overlay分区（Resizing partitions）
 
 参考：<https://openwrt.org/docs/guide-user/installation/openwrt_x86#resizing_partitions>
 
@@ -54,7 +57,7 @@ tags:
    reboot
    ```
 
-## openwrt新增挂载分区
+### openwrt新增挂载分区
 
 参考：<https://openwrt.org/docs/techref/block_mount>
 
@@ -81,16 +84,18 @@ opkg install nginx-all-module  #安装nginx
 curl -s https://install.zerotier.com | sudo bash  #安装zerotier
 ```
 
-### 安装gost
-
-官方网站：<https://gost.run/>
-
 ## zerotier配置
 
 1. service zerotier enable
 1. 修改/etc/config/zerotier文件中list join为自己的network ID
 
-## 配置gost
+## OpenWRT中的gost
+
+### 安装gost
+
+官方网站：<https://gost.run/>
+
+### 配置gost
 
 服务端配置：
 
@@ -102,6 +107,32 @@ curl -s https://install.zerotier.com | sudo bash  #安装zerotier
         "relay+tls://0.0.0.0:10000"
     ]
 }
+
+```
+
+服务端服务文件：
+
+```bash
+[Unit]
+Description=GOST Service
+After=network.target
+Wants=network.target
+
+[Service]
+# This service runs as root. You may consider to run it as another user for security concerns.
+# By uncommenting the following two lines, this service will run as user gost/gost.
+# More discussion at https://github.com/gost/gost-core/issues/1011
+# User=gost
+# Group=gost
+Type=simple
+PIDFile=/run/gost.pid
+ExecStart=/usr/bin/gost -C /etc/gost/config.json
+Restart=on-failure
+# Don't restart in the case of configuration error
+RestartPreventExitStatus=23
+
+[Install]
+WantedBy=multi-user.target
 
 ```
 
@@ -119,6 +150,32 @@ curl -s https://install.zerotier.com | sudo bash  #安装zerotier
     ]
 }
 
+```
+
+### gost服务脚本
+
+```bash
+#!/bin/sh /etc/rc.common
+START=50
+
+BIN=my-proxy
+DAEMON=/usr/sbin/$BIN
+DESC=$BIN
+RUN_D=/var/run
+CONFIG_FILE=/etc/myproxy/conf.json
+LOG_FILE=/var/log/myproxy.log
+
+start() {
+  echo -n "Starting $DESC "
+  $DAEMON  -C $CONFIG_FILE > $LOG_FILE 2>&1 &
+  echo "."
+}
+
+stop() {
+  echo -n "Stopping $DESC "
+  kill `pidof $BIN` > /dev/null 2>&1
+  echo "."
+}
 ```
 
 ## nginx配置
@@ -187,11 +244,6 @@ curl -s https://install.zerotier.com | sudo bash  #安装zerotier
         }
    }
    ```
-
-## 配置服务使能
-
-service nginx enable  
-service zerotier enable
 
 ## 服务端搭建
 
