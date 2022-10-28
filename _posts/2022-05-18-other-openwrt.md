@@ -33,13 +33,19 @@ tags:
    src/gz openwrt_telephony https://mirrors.ustc.edu.cn/openwrt/releases/21.02.3/packages/aarch64_generic/telephony
    ```
 
+   或者
+
+   ```bash
+   sed -i 's_downloads.openwrt.org_mirrors.ustc.edu.cn/openwrt_' /etc/opkg/distfeeds.conf
+   ```
+
 ## OpenWRT分区
 
 ### 调整overlay分区（Resizing partitions）
 
 参考：<https://openwrt.org/docs/guide-user/installation/openwrt_x86#resizing_partitions>
 
-1. 首先调整分区（Resizing partitions），通过fdisk将剩余分区新建
+1. 首先调整分区（Resizing partitions），通过cfdisk或fdisk将overlay分区resize，r2s中是将mmcblk0p2扩容
 2. Resizing filesysstem，以resizing F2FS overlay举例
 
    ```bash
