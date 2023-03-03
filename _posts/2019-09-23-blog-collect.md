@@ -17,3 +17,7 @@ tags:
 ### network
 
 [三十天学不会TCP,UDP/IP网络编程](https://rogerzhu.gitbooks.io/-tcp-udp-ip/content/)
+
+### other
+
+[how to build a blog at github](http://www.cnfeat.com/blog/2014/05/11/how-to-build-a-blog/)
