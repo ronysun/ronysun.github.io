@@ -13,8 +13,8 @@ tags:
 
 |项目|参数|
 |---|---|
-|Model|FriendlyElec NanoPi R2S|
-|Architecture|ARMv8 Processor rev 4|
+| Model |FriendlyElec NanoPi R2S |
+| Architecture | ARMv8 Processor rev 4 |
 
 查看架构命令：opkg print-architecture
 
@@ -142,7 +142,7 @@ WantedBy=multi-user.target
 
 ```
 
-路由端口转发功能，路由client端配置文件example:
+路由端口转发功能，路由client端配置文件example，放置在openwrt上的/etc/myproxy目录下，命名为config.json:
 
 ```json
 {
@@ -158,7 +158,9 @@ WantedBy=multi-user.target
 
 ```
 
-### gost服务脚本
+### openwrt上gost作为client的服务脚本
+
+放置在/etc/init.d/myproxy
 
 ```bash
 #!/bin/sh /etc/rc.common
