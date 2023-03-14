@@ -3,7 +3,7 @@ layout: article
 title: "OpenWRT开发"
 data: 2022-05-18
 tags:
-  - other
+  - develop
 
 ---
 

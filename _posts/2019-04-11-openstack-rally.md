@@ -2,7 +2,7 @@
 layout: article  
 title: Rally框架分析   
 tags:
-  - openstack
+  - 云计算
   - testing
 ---
 ## rally/rally的目录结构
