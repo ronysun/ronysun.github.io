@@ -2,7 +2,7 @@
 layout: article  
 title: rally task start命令代码及task配置文件分析   
 tags:
-  - openstack
+  - 云计算
   - testing
 ---
 ## rally task配置文件

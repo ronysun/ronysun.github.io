@@ -2,7 +2,7 @@
 layout: article
 title: "rally"
 categories:
-  - openstack 
+  - 云计算 
 ---
 ## rally命令
 

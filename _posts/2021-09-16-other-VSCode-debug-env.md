@@ -3,7 +3,7 @@ layout: article
 title: "WSL+VSCode+python调试环境搭建"
 data: 2021-09-11
 tags:
-  - python
+  - develop
 
 ---
 

@@ -3,7 +3,6 @@ layout: article
 title: "CI环境搭建"
 tags:
   - CI&CD
-  - testing
 ---
 ## CI框架
 

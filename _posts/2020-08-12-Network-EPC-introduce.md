@@ -4,7 +4,6 @@ title: "EPC核心网介绍"
 date: 2020-08-28
 tags:
   - Network
-  - LTE
 
 ---
 ## 概述
