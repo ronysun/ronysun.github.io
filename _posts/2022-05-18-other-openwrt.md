@@ -21,7 +21,7 @@ tags:
 ## 烧写官方固件
 
 1. 下载官方固件21.02.3：<https://downloads.openwrt.org/releases/21.02.3/targets/rockchip/armv8/>
-1. 使用balenaEtcher将openwrt烧写到TF卡中 <https://wiki.stationpc.cn/docs/stationpc/openwrt>
+1. 使用balenaEtcher将OpenWRT烧写到TF卡中 <https://wiki.stationpc.cn/docs/stationpc/openwrt>
 1. 更新opkg源<https://mirrors.ustc.edu.cn/help/openwrt.html>
 
    ```bash
@@ -63,7 +63,7 @@ tags:
    reboot
    ```
 
-### openwrt新增挂载分区
+### OpenWRT新增挂载分区
 
 参考：<https://openwrt.org/docs/techref/block_mount>
 
@@ -128,7 +128,7 @@ Wants=network.target
 # This service runs as root. You may consider to run it as another user for security concerns.
 # By uncommenting the following two lines, this service will run as user gost/gost.
 # More discussion at https://github.com/gost/gost-core/issues/1011
-# User=gost
+# User=
 # Group=gost
 Type=simple
 PIDFile=/run/gost.pid
@@ -142,7 +142,7 @@ WantedBy=multi-user.target
 
 ```
 
-路由端口转发功能，路由client端配置文件example，放置在openwrt上的/etc/myproxy目录下，命名为config.json:
+路由端口转发功能，路由client端配置文件example，放置在OpenWRT上的/etc/myproxy目录下，命名为config.json:
 
 ```json
 {
@@ -158,7 +158,7 @@ WantedBy=multi-user.target
 
 ```
 
-### openwrt上gost作为client的服务脚本
+### OpenWRT上gost作为client的服务脚本
 
 放置在/etc/init.d/myproxy
 
@@ -286,7 +286,7 @@ Ubuntu 22.04 LTS
 
 ### 软件安装
 
- apt install rinetd ddclient gost  
+ apt install rinetd ddclient   
  rinetd配置  
 
  ```bash
