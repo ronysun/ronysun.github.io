@@ -7,6 +7,21 @@ tags:
 
 ---
 
+## 产品需求
+
+1. wireguard
+2. zerotier
+3. tcpdump
+4. 支持随身wifi模块上网
+5. 端口映射
+6. gost代理加密
+7. BBR拥塞控制
+
+可选项：
+
+1. 远程桌面
+2. 向日葵远程控制
+
 ## 信息  
 
 硬件：  
@@ -82,18 +97,35 @@ tags:
    vim /etc/config/fstab   # 编辑分区挂载点配置,enable为1时，开机自动挂载
    ```
 
-## 安装软件
+## OpenWRT中使用随身wifi
+
+1. 需要添加一个端口eth2
+2. 需要设置防火墙区域：将eth2接口发送到lan区域的“出站数据”设置为“接受”
+
+## OpenWRT使用wireguard
+
+OpenWRT使用wireguard有两种方式：
+
+1. 添加wireguard接口
+2.通过安装wireguard工具，编写wireguard配置文件后台操作 
 
 ```bash
+mkdir /etc/wireguard
 opkg update
-opkg install nginx-all-module  #安装nginx
-curl -s https://install.zerotier.com | sudo bash  #安装zerotier
+opkg install kmod-udptunnel4 kmod-udptunnel6 kmod-wireguard wireguard-tools wireguard luci-proto-wireguard luci-app-wireguard unshare coreutils-stat
+vim /etc/rc.local   #添加 wg-quick up wg0 
 ```
+
+将[wg-quick](../assets/wg-quick)拷贝至/usr/sbin/
 
 ## zerotier配置
 
-1. service zerotier enable
-1. 修改/etc/config/zerotier文件中list join为自己的network ID
+```bash
+curl -s https://install.zerotier.com | sudo bash  #安装zerotier
+service zerotier enable
+```
+
+修改/etc/config/zerotier文件中list join为自己的network ID
 
 ## OpenWRT中的gost
 
@@ -101,9 +133,9 @@ curl -s https://install.zerotier.com | sudo bash  #安装zerotier
 
 官方网站：<https://gost.run/>
 
-### 配置gost
+### 服务端配置
 
-服务端配置：
+#### 配置
 
 ```json
 {
@@ -116,7 +148,7 @@ curl -s https://install.zerotier.com | sudo bash  #安装zerotier
 
 ```
 
-服务端服务文件：
+#### 服务端服务文件
 
 ```bash
 [Unit]
@@ -128,7 +160,7 @@ Wants=network.target
 # This service runs as root. You may consider to run it as another user for security concerns.
 # By uncommenting the following two lines, this service will run as user gost/gost.
 # More discussion at https://github.com/gost/gost-core/issues/1011
-# User=
+# User=gost
 # Group=gost
 Type=simple
 PIDFile=/run/gost.pid
@@ -142,6 +174,10 @@ WantedBy=multi-user.target
 
 ```
 
+### 客户端
+
+#### 客户端配置
+
 路由端口转发功能，路由client端配置文件example，放置在OpenWRT上的/etc/myproxy目录下，命名为config.json:
 
 ```json
@@ -149,7 +185,8 @@ WantedBy=multi-user.target
     "Debug": false,
     "Retries": 1,
     "ServeNodes": [
-        "tcp://0.0.0.0:10001/DOMAIN:PORT"  //14433是本地服务端口，DOMAIN和PORT是目标地址和端口
+        "tcp://0.0.0.0:10001/DOMAIN:PORT",  //10001是本地服务端口，DOMAIN和PORT是目标地址和端口
+        "tcp://0.0.0.0:10002/DOMAIN2:PORT2"
     ],
     "ChainNodes": [
         "relay+tls://SERVER-DOMAIN:PORT"  //服务端地址和端口
@@ -158,7 +195,7 @@ WantedBy=multi-user.target
 
 ```
 
-### OpenWRT上gost作为client的服务脚本
+#### OpenWRT上gost作为client的服务脚本
 
 放置在/etc/init.d/myproxy
 
@@ -185,6 +222,7 @@ stop() {
   echo "."
 }
 ```
+
 ## OpenWRT编译
 
 系统：ubuntu 22.04
@@ -195,90 +233,33 @@ sudo apt update
 sudo apt install gcc make unzip bzip2 g++ lib32ncurses-dev  
 git clone https://git.openwrt.org/openwrt/openwrt.git  # download source code
 git checkout -b 21.02  # 切换到发布分支
+./scripts/feeds update -a  #默认没有luci，需要执行更新操作
+./scripts/feeds install -a
 make menuconfig       # 编译配置
 make                  # 开始编译
-
 ```
 
-### 添加文件
+编译完成的结果可使用dd命令烧写到TF卡中
 
-在
+```bash
+gunzip bin/targets/rockchip/armv8/$FILE #先解压结果
+sudo dd if=bin/targets/rockchip/armv8/$FILE of=/dev/$device status=process #烧写至TF
+```
 
 ### 修改默认密码
 
-在/etc/shadow中添加  
+在package/base-files/files/etc/shadow中添加  
 root:$1$NnC3ULCE$yzPuIIXiWbtQgg.ROhWpH1:16821:0:99999:7:::
+
+### 增加文件
+
+例如要在/usr/sbin下添加一个test.bin文件
+则先创建对应目录：package/base-files/files/usr/sbin/
+再将test.bin拷贝到该目录下，添加完成
 
 ### Reference
 
 <https://www.moewah.com/archives/4003.html>
-
-## nginx配置
-
-1. 修改/etc/config/nginx文件关闭uci配置并删除其中的server配置
-1. 新建/etc/nginx/nginx.conf：
-
-   ```bash
-   # This file is re-created when Nginx starts.
-   # Consider using UCI or creating files in /etc/nginx/conf.d/ for configuration.
-   # Parsing UCI configuration is skipped if uci set nginx.global.uci_enable=false
-   # For details see: https://openwrt.org/docs/guide-user/services/webserver/nginx
-
-   worker_processes auto;
-
-   user root;
-
-   events {}
-
-   http {
-           access_log off;
-           log_format openwrt
-                   '$request_method $scheme://$host$request_uri => $status'
-                   ' (${body_bytes_sent}B in ${request_time}s) <- $http_referer';
-
-           include mime.types;
-           default_type application/octet-stream;
-           sendfile on;
-
-           client_max_body_size 128M;
-           large_client_header_buffers 2 1k;
-
-           gzip on;
-           gzip_vary on;
-           gzip_proxied any;
-
-           root /www;
-
-   }
-   include conf.d/*.conf;
-
-   ```
-
-1. 新建/etc/nginx/conf.d/xxx.conf
-
-   ```bash
-
-   stream {
-
-       upstream stream_backend {
-            server example:6000;
-       }
-
-       server {
-           listen                6000 ;
-           proxy_ssl             on;
-           proxy_pass            stream_backend;
-
-           ssl_certificate       /root/cacert.pem;
-           ssl_certificate_key   /root/privkey.pem;
-           ssl_protocols         SSLv3 TLSv1 TLSv1.1 TLSv1.2;
-           ssl_ciphers           HIGH:!aNULL:!MD5;
-           ssl_session_timeout   4h;
-           ssl_handshake_timeout 30s;
-           #...
-        }
-   }
-   ```
 
 ## 服务端搭建
 
@@ -286,15 +267,16 @@ Ubuntu 22.04 LTS
 
 ### 软件安装
 
- apt install rinetd ddclient   
- rinetd配置  
+ apt install rinetd ddclient
+
+### rinetd配置
 
  ```bash
 0.0.0.0 10000 www.baidu.com 5222
 
  ```
 
- ddclient配置
+### ddclient配置
 
  ```bash
  
