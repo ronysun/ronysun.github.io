@@ -7,6 +7,21 @@ tags:
 
 ---
 
+## 产品需求
+
+1. wireguard
+2. zerotier
+3. tcpdump
+4. 支持随身wifi模块上网
+5. 端口映射
+6. gost代理加密
+7. BBR拥塞控制
+
+可选项：
+
+1. 远程桌面
+2. 向日葵远程控制
+
 ## 信息  
 
 硬件：  
@@ -89,7 +104,13 @@ tags:
 
 ## OpenWRT使用wireguard
 
+OpenWRT使用wireguard有两种方式：
+
+1. 添加wireguard接口
+2.通过安装wireguard工具，编写wireguard配置文件后台操作 
+
 ```bash
+mkdir /etc/wireguard
 opkg update
 opkg install kmod-udptunnel4 kmod-udptunnel6 kmod-wireguard wireguard-tools wireguard luci-proto-wireguard luci-app-wireguard unshare coreutils-stat
 vim /etc/rc.local   #添加 wg-quick up wg0 
@@ -212,15 +233,29 @@ sudo apt update
 sudo apt install gcc make unzip bzip2 g++ lib32ncurses-dev  
 git clone https://git.openwrt.org/openwrt/openwrt.git  # download source code
 git checkout -b 21.02  # 切换到发布分支
+./scripts/feeds update -a  #默认没有luci，需要执行更新操作
+./scripts/feeds install -a
 make menuconfig       # 编译配置
 make                  # 开始编译
+```
 
+编译完成的结果可使用dd命令烧写到TF卡中
+
+```bash
+gunzip bin/targets/rockchip/armv8/$FILE #先解压结果
+sudo dd if=bin/targets/rockchip/armv8/$FILE of=/dev/$device status=process #烧写至TF
 ```
 
 ### 修改默认密码
 
-在/etc/shadow中添加  
+在package/base-files/files/etc/shadow中添加  
 root:$1$NnC3ULCE$yzPuIIXiWbtQgg.ROhWpH1:16821:0:99999:7:::
+
+### 增加文件
+
+例如要在/usr/sbin下添加一个test.bin文件
+则先创建对应目录：package/base-files/files/usr/sbin/
+再将test.bin拷贝到该目录下，添加完成
 
 ### Reference
 
