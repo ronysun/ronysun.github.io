@@ -48,6 +48,18 @@ tags:
    src/gz openwrt_telephony https://mirrors.ustc.edu.cn/openwrt/releases/21.02.3/packages/aarch64_generic/telephony
    ```
 
+   22.03.4版本
+
+   ```bash
+   src/gz openwrt_core https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/22.03.4/targets/rockchip/armv8/packages
+   src/gz openwrt_base https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/22.03.4/packages/aarch64_generic/base
+   src/gz openwrt_luci https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/22.03.4/packages/aarch64_generic/luci
+   src/gz openwrt_packages https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/22.03.4/packages/aarch64_generic/packages
+   src/gz openwrt_routing https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/22.03.4/packages/aarch64_generic/routing
+   src/gz openwrt_telephony https://mirrors.tuna.tsinghua.edu.cn/openwrt/releases/22.03.4/packages/aarch64_generic/telephony
+
+   ```
+
    或者
 
    ```bash
@@ -256,6 +268,14 @@ root:$1$NnC3ULCE$yzPuIIXiWbtQgg.ROhWpH1:16821:0:99999:7:::
 例如要在/usr/sbin下添加一个test.bin文件
 则先创建对应目录：package/base-files/files/usr/sbin/
 再将test.bin拷贝到该目录下，添加完成
+
+### 修改默认opkg源
+
+In menuconfig that is [*] Image configuration => [*] Version configuration options => (...) Release repository
+
+### 修改默认LAN网段
+
+In menuconfig that is [*] Image configuration => [*] Preinit configuration options
 
 ### Reference
 
