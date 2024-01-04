@@ -11,7 +11,6 @@ tags:
 
 Voice over Long-Term Evolution或Voice over LTE，一般称高清通话，又译为长期演进语音承载。它基于IP多媒体子系统（IMS，IP Multimedia Subsystem）网络。
 
-
 ## 缩略语
 
 *chunk*:SCTP报文中的信息单元，由chunk头和chunk信息组成

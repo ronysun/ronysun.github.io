@@ -31,7 +31,7 @@ tags:
 ## Broadcom公司的交换芯片
 
 Broadcom公司的XGS家族包含Tomahawk和Trident两个系列，DNX家族包括Jericho系列。其中Tomahawk属于“傻快”型，带宽大，接口多，功能少，多用来做高端数据中心交换机；Trident属于“智商型”，功能特性多一些，多用来做企业级交换机；Jericho属于“城府型”，大缓存，可编程，多用来做城域汇聚路由器。  
-![Braodcom交换信息屏](https://5b0988e595225.cdn.sohucs.com/images/20191215/007f87b9118c4a11ac3420e54d154020.jpeg)
+![Braodcom交换芯片](https://5b0988e595225.cdn.sohucs.com/images/20191215/007f87b9118c4a11ac3420e54d154020.jpeg)
 
 ### Trident 4 BCM56880
 
