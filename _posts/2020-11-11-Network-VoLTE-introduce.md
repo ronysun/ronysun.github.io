@@ -4,14 +4,12 @@ title: "VoLTE introduce"
 data: 2020-11-11
 tags:
   - Network
-  - LTE
 
 ---
 
 ## 摘要
 
 Voice over Long-Term Evolution或Voice over LTE，一般称高清通话，又译为长期演进语音承载。它基于IP多媒体子系统（IMS，IP Multimedia Subsystem）网络。
-
 
 ## 缩略语
 

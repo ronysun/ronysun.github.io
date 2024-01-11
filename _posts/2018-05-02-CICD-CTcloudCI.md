@@ -3,7 +3,6 @@ layout: article
 title: "CI环境搭建"
 tags:
   - CI&CD
-  - testing
 ---
 ## CI框架
 
@@ -11,8 +10,8 @@ Jenkins+Gerrit+GIT+Docker+ansible
 
 本平台实现的功能：
 
-1. 当主分支添加发布tag时，出发打包过程，将源代码进行rpmbuild，并将打包结果发布到私有yum源上
-1. 开发提交commit时，出发tox任务，进行单元测试以及代码覆盖率检查
+1. 当主分支添加发布tag时，触发打包过程，将源代码进行rpmbuild，并将打包结果发布到私有yum源上
+1. 开发提交commit时，触发tox任务，进行单元测试以及代码覆盖率检查
 1. 每日凌晨对test分支上的代码进行打包、部署，通过rally和tempest进行功能和集成测试
 1. 通过docker的方式进行打包环境的隔离，解决CI平台资源不足的问题
 1. 通过Jenkins Job Builder实现CI平台上JenkinsJobs的代码式管理，使平台能够快速搭建

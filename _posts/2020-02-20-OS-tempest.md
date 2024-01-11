@@ -2,7 +2,7 @@
 layout: article
 title: "Openstack的集成测试框架Tempst"
 tags:
-  - openstack
+  - 云计算
   - testing
 
 ---
