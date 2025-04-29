@@ -1,9 +1,12 @@
 ---
 layout: article
 title: "AIDC智算中心方案“
-data: 2024-08-08
+data: 2025-04-21
 tags:
-  - develop
+  - AIDC
+  - AI infra
+  - LLM
+  - AI
 
 ---
 
@@ -72,7 +75,7 @@ DGX BasePOD的硬件组成包括：
 | 带内管理和存储网络RoCE交换机 | 2x Mellanox SN4600C，100Gx64| 2 |
 | 带外管理交换机 | Mellanox SN2201，48x RJ45 + 4x QSFP28 100 GbE | 2 |
 | 400G线缆| 980-9I13N-00C010 | 32 |
-| 400G光模块 | OSFP多模光模块（服务器+交换机侧） | 32*2  |
+| 400G光模块 | OSFP多模光模块（服务器+交换机侧） | 32x2  |
 | 100G有源线缆 | 带光模块线缆 |  |
 | DAC铜缆 | infiniband交换机互联 |  | 
 | 带外管理网线 | 六类网线 | 45 |
@@ -86,8 +89,8 @@ DGX SuperPOD是融合了DGX服务器、IB和RoCE网络、管理节点、存储�
 其管理rack如下所示：
 ![dgx-superpod-management-rack](../image/AIDC-solution/dgx-superpod-h100-arch-Mange.png)
 管理机架中的compute switch是IB交换机，是算力网交换机，用于连接DGX服务器上的GPU卡。
-一个SU中leaf交换机的数量=计算节点数量*8/32，即32台DGX服务器需要8个leaf交换机。
-spine交换机数量=计算节点数量*8/32/2，即32台DGX服务器需要4个spine交换机。
+一个SU中leaf交换机的数量=计算节点数量x8/32，即32台DGX服务器需要8个leaf交换机。
+spine交换机数量=计算节点数量x8/32/2，即32台DGX服务器需要4个spine交换机。
 因此算力网络使用400G NDR IB交换机12台
 
 SuperPOD典型配置如下所示：
