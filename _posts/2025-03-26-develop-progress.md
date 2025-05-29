@@ -1,10 +1,9 @@
 ---
 layout: article
 title: "web网站开发过程
-data: 2024-08-08
+data: 2025-03-26
 tags:
   - develop
-
 ---
 
 ## 网站开发流程
