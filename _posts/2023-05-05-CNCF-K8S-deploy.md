@@ -1,7 +1,7 @@
 ---
 layout: article
 title: "K8S集群搭建"
-data: 2021-05-05
+data: 2023-05-05
 tags:
   - CNCF
   - 云计算

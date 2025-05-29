@@ -1,7 +1,7 @@
 ---
 layout: article
 title: "B端产品经理入门"
-data: 2024-07-26
+data: 2024-07-23
 tags:
   - 产品管理
 

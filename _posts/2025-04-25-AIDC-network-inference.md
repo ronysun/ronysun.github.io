@@ -5,7 +5,6 @@ data: 2025-04-25
 tags:
   - AIDC
   - AI infra
-
 ---
 
 ## AIDC智算中心解决方案
