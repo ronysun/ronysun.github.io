@@ -49,6 +49,6 @@ tags:
 
 ## References
 
-<https://www.bilibili.com/video/BV18zcme1ELC>  
-<https://zhuanlan.zhihu.com/p/16323685381>  
+<https://www.bilibili.com/video/BV18zcme1ELC>
+<https://zhuanlan.zhihu.com/p/16323685381>
 <https://lmsys.org/blog/2025-05-05-large-scale-ep/>
