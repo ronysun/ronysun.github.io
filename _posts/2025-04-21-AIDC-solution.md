@@ -1,13 +1,10 @@
 ---
 layout: article
-title: "AIDC智算中心方案“
+title: "AIDC智算中心方案"
 data: 2025-04-21
 tags:
   - AIDC
   - AI infra
-  - LLM
-  - AI
-
 ---
 
 ## AIDC智算中心解决方案
@@ -123,5 +120,5 @@ AIDC需要高速并行文件存储系统，提供该存储产品的主要厂商�
 
 ## 参考
 
-[BasePOD 参考架构](https://docs.nvidia.com/dgx-basepod/reference-architecture-infrastructure-foundation-enterprise-ai/latest/reference-architectures.html)
+[BasePOD 参考架构](https://docs.nvidia.com/dgx-basepod/reference-architecture-infrastructure-foundation-enterprise-ai/latest/reference-architectures.html)  
 [SuperPOD 参考架构](https://docs.nvidia.com/dgx-superpod/reference-architecture-scalable-infrastructure-h100/latest/dgx-superpod-architecture.html)
