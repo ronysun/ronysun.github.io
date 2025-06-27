@@ -1,6 +1,6 @@
 ---
 layout: article
-title: "AIDC智算中心网络-推理篇“
+title: "AIDC智算中心网络-推理篇"
 data: 2025-04-25
 tags:
   - AIDC
@@ -45,7 +45,8 @@ G: GPU数量
 
 
 假设模型有L层，在一次推理过程中，S(in)个输入token在模型的每一layer进行2次批量合并（NCCL的All-reduce），共2L次，而对于每个输出Token，在模型的每个layer的中均进行2次合并，共 2xS(out) x L 次。此外，在Prefill阶段和Decode阶段之间有一次KV缓存的传递。
+
 ## Reference
 
-- [AI智算中心网络-推理篇](https://mp.weixin.qq.com/s/yQn56hh56FE1XDGrrKme7Q)
+- [AI智算中心网络-推理篇](https://mp.weixin.qq.com/s/yQn56hh56FE1XDGrrKme7Q)  
 - [AI智算中心网络-推理篇2](https://mp.weixin.qq.com/s/ejwQCCfqBrgh4nWYsO6x2w)
