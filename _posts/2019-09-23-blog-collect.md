@@ -1,10 +1,16 @@
 ---
 layout: article
-title: "Blog Collect"
+title: "好用工具收藏"
+data: 2025-05-27
 tags:
-  - other
-
+  - short-cut
 ---
+
+### 好用工具
+
+[上传数据生成动态图表](https://flourish.studio/)  
+[上传文字或文件生成图表](https://www.napkin.ai/)
+
 ### linux系
 
 [Linux内核系统架构介绍](https://mp.weixin.qq.com/s/Wl8sYr9ydrLCBpTdFamFnw)  
